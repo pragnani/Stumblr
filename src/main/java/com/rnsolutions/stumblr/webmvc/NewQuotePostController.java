@@ -40,15 +40,20 @@ public class NewQuotePostController extends ParameterizableViewController {
     /** {@inheritDoc} */
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+      
+//        if(1==1){
+//            throw new RuntimeException("Testing");
+//        }
         LOGGER.info("handleRequestInternal");
         if (!StringUtils.isBlank(request.getParameter("quote"))) {
-            //save the new post
+            
             final QuotePost quotePost = new QuotePost();
             quotePost.setQuote(request.getParameter("quote"));
             quotePost.setSource(request.getParameter("source"));
             LOGGER.debug("handleRequestInternal, quote{} source{}", request.getParameter("quote"),request.getParameter("source"));
             
             postService.saveOrUpdate(quotePost);
+            
             return new ModelAndView("redirect:/homepage.blr");
         }
         return super.handleRequestInternal(request, response);
