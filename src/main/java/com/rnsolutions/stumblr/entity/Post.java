@@ -2,12 +2,12 @@ package com.rnsolutions.stumblr.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -18,14 +18,17 @@ import javax.persistence.Version;
  * @author bsneade
  * @version $Id: $
  */
-@Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-public class Post implements Serializable {
+//@Entity
+@MappedSuperclass
+//@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Post implements Serializable {
 
+	 
     private Long id;
 
     private String author;
 
+    @Temporal(TemporalType.DATE) 
     private Date createDate;
 
     /**
@@ -36,7 +39,8 @@ public class Post implements Serializable {
      * @return a {@link java.lang.Long} object.
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id")
     public Long getId() {
         return id;
     }
@@ -68,7 +72,7 @@ public class Post implements Serializable {
      * @param createDate a {@link java.util.Date} object.
      */
     public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+        this.createDate = new Date();
     }
 
     @Column(length=60)

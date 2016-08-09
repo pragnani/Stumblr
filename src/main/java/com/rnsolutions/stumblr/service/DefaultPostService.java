@@ -1,7 +1,5 @@
 package com.rnsolutions.stumblr.service;
 
-import com.rnsolutions.stumblr.dao.PostDao;
-import com.rnsolutions.stumblr.entity.Post;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.rnsolutions.stumblr.dao.PostDao;
+import com.rnsolutions.stumblr.entity.Post;
 
 /**
  * Default Implementation of the Post Service.
@@ -35,13 +36,16 @@ public class DefaultPostService implements PostService {
     }
 
     /** {@inheritDoc} */
+    //Anyobject of type Post (LinkPost, QuotePost, TextPost can be saveorupdated)
     @Override
+    @Transactional(propagation=Propagation.REQUIRED)
     public void saveOrUpdate(final Post post) {
         postDao.saveOrUpdate(post);
         LOGGER.info("Saved Post{}", post);
     }
 
     /** {@inheritDoc} */
+  //Anyobject of type Post (LinkPost, QuotePost, TextPost can be deleted)
     @Override
     public void delete(final Post post) {
         postDao.delete(post);

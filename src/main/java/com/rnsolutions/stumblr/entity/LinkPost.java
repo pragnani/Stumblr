@@ -12,6 +12,10 @@ import javax.persistence.Entity;
 @Entity
 public class LinkPost extends Post {
 
+	// Inherited id field mapped to LinkPost.id
+    // Inherited author field mapped to LinkPost.author
+    // Inherited createddate field mapped to LinkPost.createddate
+	
     private String title;
 
     private String link;

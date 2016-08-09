@@ -1,14 +1,18 @@
 package com.rnsolutions.stumblr.service;
 
-import com.rnsolutions.stumblr.dao.PostDao;
-import com.rnsolutions.stumblr.entity.Post;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import org.junit.Assert;
+
 import org.easymock.EasyMock;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.rnsolutions.stumblr.dao.PostDao;
+import com.rnsolutions.stumblr.entity.LinkPost;
+import com.rnsolutions.stumblr.entity.Post;
+import com.rnsolutions.stumblr.entity.QuotePost;
 
 /**
  *
@@ -39,7 +43,7 @@ public class DefaultPostServiceTest {
         EasyMock.reset(postDao);
 
         //set up test data
-        final Post post = new Post();
+        final Post post = new LinkPost();
 
         //set up expectations
         postDao.saveOrUpdate(post);
@@ -63,7 +67,7 @@ public class DefaultPostServiceTest {
         EasyMock.reset(postDao);
 
         //set up the test data
-        final Post post = new Post();
+        final Post post = new QuotePost();
 
         //set up expectations
         postDao.delete(post);
@@ -83,7 +87,7 @@ public class DefaultPostServiceTest {
         EasyMock.reset(postDao);
 
         final List<Post> posts = Arrays.asList(new Post[]{
-                    new Post(), new Post(), new Post(), new Post()
+                    new LinkPost(), new LinkPost(), new LinkPost(), new LinkPost()
                 });
 
         EasyMock.expect(postDao.search(new HashMap<String, Object>())).andReturn(posts);
@@ -102,7 +106,7 @@ public class DefaultPostServiceTest {
         EasyMock.reset(postDao);
 
         final List<Post> posts = Arrays.asList(new Post[]{
-                    new Post(), new Post(), new Post(), new Post()
+                    new LinkPost(), new LinkPost(), new LinkPost(), new LinkPost()
                 });
 
         EasyMock.expect(postDao.search(new HashMap<String, Object>())).andReturn(posts);
@@ -121,7 +125,7 @@ public class DefaultPostServiceTest {
         EasyMock.reset(postDao);
 
         final List<Post> posts = Arrays.asList(new Post[]{
-                    new Post(), new Post(), new Post(), new Post()
+                    new LinkPost(), new LinkPost(), new LinkPost(), new LinkPost()
                 });
 
         EasyMock.expect(postDao.search(new HashMap<String, Object>())).andReturn(posts);
@@ -140,7 +144,7 @@ public class DefaultPostServiceTest {
         EasyMock.reset(postDao);
 
         final List<Post> posts = Arrays.asList(new Post[]{
-                    new Post(), new Post(), new Post(), new Post()
+                    new QuotePost(), new QuotePost(), new QuotePost(), new QuotePost()
                 });
 
         EasyMock.expect(postDao.search(new HashMap<String, Object>())).andReturn(posts);

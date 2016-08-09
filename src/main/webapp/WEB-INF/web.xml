@@ -1,56 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="stumblr" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-    <display-name>Stumblr</display-name>
-    <description>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Stumblr</display-name>
+	<description>
       Development candidate excercise.
     </description>
 
-    <!-- Tell Spring where to find the application context configuration -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
+	<!-- Tell Spring where to find the application context configuration -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
             /WEB-INF/enable-jmx.xml
             /WEB-INF/enable-aop.xml
             classpath:com/rnsolutions/stumblr/applicationContext.xml
+               /WEB-INF/dwr.xml
         </param-value>
-    </context-param>
+	</context-param>
 
-    <!-- Bootstrap the root application context as usual using ContextLoaderListener -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+	<!-- Bootstrap the root application context as usual using ContextLoaderListener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
-    <servlet>
-        <servlet-name>dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 
-    <servlet>
-        <servlet-name>dwr</servlet-name>
-        <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </servlet>
-    
-    <!-- map all requests for /main/* to the dispatcher servlet -->
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>*.blr</url-pattern>
-    </servlet-mapping>
+	<servlet>
+		<servlet-name>dwr</servlet-name>
+		<servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	
+	<!-- OpenSessionInViewFilter settings -->
 
-    <!-- map the dwr requests -->
-    <servlet-mapping>
-        <servlet-name>dwr</servlet-name>
-        <url-pattern>/dwr/*</url-pattern>
-    </servlet-mapping>
+	<!-- <filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate.support.OpenSessionInViewFilter</filter-class>
+	</filter>
 
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
-    
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.blr</url-pattern>
+	</filter-mapping> -->
+
+	<!-- map all requests for /main/* to the dispatcher servlet -->
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.blr</url-pattern>
+	</servlet-mapping>
+
+	<!-- map the dwr requests -->
+	<servlet-mapping>
+		<servlet-name>dwr</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
 </web-app>

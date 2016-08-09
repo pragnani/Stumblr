@@ -1,8 +1,9 @@
 package com.rnsolutions.stumblr.dwr;
 
+import java.util.List;
+
+import com.rnsolutions.stumblr.entity.Post;
 import com.rnsolutions.stumblr.service.PostService;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * DWR for fetching more posts
@@ -17,13 +18,11 @@ public class PostDwr {
         this.postService = postService;
     }
 
-    public Map<String, String> getMorePosts(int offset) {
-        final Map<String, String> returnMap = new HashMap<String, String>(2);
+    public List<Post> getMorePosts(int offset) {
 
         //we only want 5, but we need to know if we need to "more post" link
-        postService.getPosts(offset, 6);
+        return postService.getPosts(offset, 5);
 
-        return returnMap;
     }
 
 }
